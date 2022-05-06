@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer type="module" src="index.js"></script>
+    <title>3D Renderer</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #canvas {
+        width: 100vw;
+        height: 100vw;
+        max-width: 40rem;
+        max-height: 40rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Raytracing!!!!</h1>
+    <canvas width="400" height="400" id="canvas"></canvas>
+    <p>
+      W: forward
+      <br />
+      A: left
+      <br />
+      S: back
+      <br />
+      D: right
+      <br />
+      SPACE: up
+      <br />
+      SHIFT: down
+    </p>
+  </body>
+</html>
