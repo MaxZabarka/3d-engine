@@ -19,6 +19,7 @@
         flex-direction: column;
       }
       #canvas {
+        image-rendering: pixelated;
         width: 100vw;
         height: 100vw;
         max-width: 40rem;
@@ -29,6 +30,7 @@
   <body>
     <h1>Raytracing!!!!</h1>
     <canvas width="400" height="400" id="canvas"></canvas>
+    <p>FPS:<span id="fps"></span></p>
     <p>
       W: forward
       <br />

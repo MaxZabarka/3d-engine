@@ -1,9 +1,14 @@
-const traceRay = (x, y, sphere, direction, camera) => {
+import PointLight from "./PointLight.js";
+import AmbientLight from "./AmbientLight.js";
+import DirectionalLight from "./DirectionalLight.js";
+
+const traceRay = (sphere, direction, camera) => {
   // CO = O - C
   const sphereDirection = camera.position.sub(sphere.position);
 
   // < direction, direction >
   const a = direction.dot(direction);
+
   // 2 <CO, D>
   const b = 2 * direction.dot(sphereDirection);
   // < CO, CO > - r^2
@@ -19,28 +24,28 @@ const traceRay = (x, y, sphere, direction, camera) => {
   return [t1, t2];
 };
 
-const computeLighting = (point, sphere, lights) => {
+const computeLighting = (point, sphere, scene) => {
   let i = 0;
   // N = (P - C) / (| P - C |)
   const normal = point.sub(sphere.position).normalize();
-  lights.forEach((light) => {
-    if (light.type === "ambient") {
+  scene.lights.forEach((light) => {
+    let lightDirection;
+    if (light instanceof AmbientLight) {
       i += light.intensity;
-    } else {
-      let lightDirection;
-      if (light.type === "point") {
-        lightDirection = light.position.sub(point);
-      } else {
-        lightDirection = light.direction;
-      }
-      // < N, L >
-      const numerator = normal.dot(lightDirection);
+      return;
+    } else if (light instanceof PointLight) {
+      lightDirection = light.position.sub(point);
+    } else if (light instanceof DirectionalLight) {
+      lightDirection = light.direction;
+    }
 
-      if (numerator > 0) {
-        // < |N|, |L| >
-        const denominator = lightDirection.magnitude(); // |N| will always be 1 because N is a unit vector;
-        i += (numerator / denominator) * light.intensity;
-      }
+    // < N, L >
+    const numerator = normal.dot(lightDirection);
+
+    if (numerator > 0) {
+      // < |N|, |L| >
+      const denominator = lightDirection.magnitude(); // |N| will always be 1 because N is a unit vector;
+      i += (numerator / denominator) * light.intensity;
     }
   });
   return Math.min(i, 1);

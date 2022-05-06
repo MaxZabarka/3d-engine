@@ -30,11 +30,5 @@ class Canvas {
     const y = Math.round(this.height / 2) - aY;
     return [x, y];
   }
-  toViewport(x, y, camera) {
-    const viewportX = x * (camera.viewport.width / this.width) + camera.position.x;
-    const viewportY = y * (camera.viewport.height / this.height) + camera.position.y;
-    const viewportZ = camera.viewport.distance + camera.position.z;
-    return new Vector3(viewportX, viewportY, viewportZ);
-  }
 }
 export default Canvas;

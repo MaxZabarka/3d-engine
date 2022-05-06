@@ -19,9 +19,6 @@ class Vector3 {
   scale(scalar) {
     return new Vector3(this.x * scalar, this.y * scalar, this.z * scalar);
   }
-  // abs() {
-  //   return new Vector3(Math.abs(this.x), Math.abs(this.y), Math.abs(this.z));
-  // }
   normalize() {
     return this.divide(this.magnitude());
   }
