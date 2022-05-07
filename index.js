@@ -10,7 +10,8 @@ import Scene from "./Scene.js";
 import Renderer from "./Renderer.js";
 
 const canvas = new Canvas("canvas");
-const camera = new Camera(canvas);
+const camera = new Camera(canvas, 53);
+camera.rotation = new Vector3(0, 1, 0);
 const scene = new Scene();
 
 let input = new Vector3();
@@ -19,19 +20,19 @@ let input = new Vector3();
   const position = new Vector3(0, -1, 3);
   const radius = 1;
   const color = new Vector3(255, 0, 0);
-  scene.add(new Sphere(radius, position, new Material(color)));
+  scene.add(new Sphere(radius, position, new Material(color, 500)));
 }
 {
   const position = new Vector3(2, 0, 4);
   const radius = 1;
   const color = new Vector3(0, 0, 255);
-  scene.add(new Sphere(radius, position, new Material(color)));
+  scene.add(new Sphere(radius, position, new Material(color, 500)));
 }
 {
   const position = new Vector3(-2, 0, 4);
   const radius = 1;
   const color = new Vector3(0, 255, 0);
-  scene.add(new Sphere(radius, position, new Material(color)));
+  scene.add(new Sphere(radius, position, new Material(color, 10)));
 }
 {
   const position = new Vector3(0, -5001, 4);
@@ -40,7 +41,7 @@ let input = new Vector3();
   scene.add(new Sphere(radius, position, new Material(color)));
 }
 
-scene.add(new PointLight(new Vector3(2, 1, 0), 0.8));
+scene.add(new PointLight(new Vector3(2, 1, 0), 0.6));
 scene.add(new DirectionalLight(new Vector3(1, 4, 4), 0.2));
 scene.add(new AmbientLight(0.2));
 
@@ -50,7 +51,7 @@ const CAMERA_SPEED = 0.3;
 
 let timeSinceLastRender = 0;
 const fpsCounter = document.getElementById("fps");
-let fpsDisplay =0;
+let fpsDisplay = 0;
 setInterval(() => {
   fpsCounter.innerText = fpsDisplay;
 }, 500);

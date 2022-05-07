@@ -16,6 +16,9 @@ class Vector3 {
   divide(other) {
     return new Vector3(this.x / other, this.y / other, this.z / other);
   }
+  multiply(other) {
+    return new Vector3(this.x * other, this.y * other, this.z * other);
+  }
   scale(scalar) {
     return new Vector3(this.x * scalar, this.y * scalar, this.z * scalar);
   }

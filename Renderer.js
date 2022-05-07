@@ -41,8 +41,16 @@ class Renderer {
             const point = this.camera.position.add(
               direction.scale(closestDistance)
             );
-            const lighting = this.computeLighting(point, closestSphere);
-            this.canvas.putPixel(x, y, closestSphere.material.color.scale(lighting));
+            const lighting = this.computeLighting(
+              point,
+              closestSphere,
+              direction.scale(-1)
+            );
+            this.canvas.putPixel(
+              x,
+              y,
+              closestSphere.material.color.scale(lighting)
+            );
           } else {
             this.canvas.putPixel(x, y, this.camera.backgroundColor);
           }
@@ -72,7 +80,8 @@ class Renderer {
     const t2 = (-b - Math.sqrt(discriminant)) / (2 * a);
     return [t1, t2];
   }
-  computeLighting(point, sphere) {
+
+  computeLighting(point, sphere, view) {
     let i = 0;
     // N = (P - C) / (| P - C |)
     const normal = point.sub(sphere.position).normalize();
@@ -87,6 +96,7 @@ class Renderer {
         lightDirection = light.direction;
       }
 
+      // Calculate diffuse
       // < N, L >
       const numerator = normal.dot(lightDirection);
 
@@ -94,6 +104,28 @@ class Renderer {
         // < |N|, |L| >
         const denominator = lightDirection.magnitude(); // |N| will always be 1 because N is a unit vector;
         i += (numerator / denominator) * light.intensity;
+      }
+
+      if (sphere.material.specular === -1) return;
+      // Calculate Specular
+      // R = 2N< N,L > - L
+
+      const reflection = normal
+        .scale(2)
+        .scale(normal.dot(lightDirection))
+        .sub(lightDirection);
+
+      // V = P - O = -D
+
+      {
+        const numerator = reflection.dot(view);
+
+        if (numerator > 0) {
+          // adasdasd
+          // < |N|, |L| >
+          const denominator = reflection.magnitude() * view.magnitude();
+          i += light.intensity * (numerator / denominator) ** sphere.material.specular;
+        }
       }
     });
     return Math.min(i, 1);

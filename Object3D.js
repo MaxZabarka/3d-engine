@@ -1,6 +1,7 @@
 class Object3D {
-  constructor(position) {
+  constructor(position, rotation) {
     this.position = position;
+    this.rotation = rotation;
   }
 }
 
