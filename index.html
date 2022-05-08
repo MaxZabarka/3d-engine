@@ -17,24 +17,71 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        font-family: sans-serif;
       }
       #canvas {
         image-rendering: pixelated;
         width: 100vw;
-        /* height: 100vw; */
         max-width: 40rem;
-        /* max-width: 40rem;
-        max-height: 40rem; */
-        /* width: 20rem; */
-        aspect-ratio: 320 / 240;
+        aspect-ratio: 320 / 320;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      form div {
+        display: flex;
+        justify-content: space-between;
+      }
+      form input {
+        margin-left: 2rem;
       }
     </style>
   </head>
   <body>
-    <h1>Raytracing!!!!</h1>
-    <canvas width="320" height="240" id="canvas"></canvas>
+    <!-- <h1>Raytracing!!!!</h1> -->
+    <canvas width="320" height="320" id="canvas"></canvas>
     <p>FPS:<span id="fps"></span></p>
-    <p>
+    <form id="controls">
+      <div>
+        <label>Bounces</label>
+        <input value="3" name="bounces" type="number" min="0" max="5" />
+      </div>
+      <div>
+        <label>Reflectivity</label>
+        <input
+          value="0.2"
+          name="reflectivity"
+          type="range"
+          min="0"
+          max="1"
+          step="0.05"
+        />
+      </div>
+      <div>
+        <label>Specular</label>
+        <input
+          value="10"
+          name="specular"
+          type="range"
+          min="0"
+          max="10"
+          step="0.1"
+        />
+      </div>
+      <div>
+        <label>Light Intensity</label>
+        <input
+          value="0.5"
+          name="light"
+          type="range"
+          min="0"
+          max="2"
+          step="0.05"
+        />
+      </div>
+    </form>
+    <!-- <p>
       W: forward
       <br />
       A: left
@@ -46,6 +93,6 @@
       SPACE: up
       <br />
       SHIFT: down
-    </p>
+    </p> -->
   </body>
 </html>

@@ -1,5 +1,3 @@
-import Vector3 from "./Vector3.js";
-
 class Canvas {
   constructor(id) {
     const canvas = document.getElementById(id);
