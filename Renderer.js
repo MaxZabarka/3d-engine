@@ -17,7 +17,8 @@ class Renderer {
         const direction = this.camera
           .toViewport(x, y)
           .sub(this.camera.position)
-          .normalize();
+          .normalize()
+          .rotate(this.camera.rotation.y, this.camera.rotation.x);
         this.canvas.putPixel(
           x,
           y,
@@ -59,7 +60,7 @@ class Renderer {
         .scale(1 - reflective)
         .add(reflectedColor.scale(reflective));
     } else {
-      return this.camera.backgroundColor;
+      return this.camera.getBackgroundColor(direction);
     }
   }
 

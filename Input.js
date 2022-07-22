@@ -1,6 +1,6 @@
 import Vector3 from "./Vector3.js";
 
-const KEYS = ["w", "a", "s", "d", "Shift", " "];
+const KEYS = ["w", "a", "s", "d", "Shift", " ", "q", "e"];
 class Input extends Vector3 {
   constructor() {
     super();

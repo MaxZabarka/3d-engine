@@ -7,10 +7,10 @@ class Camera extends Object3D {
     fov = 75,
     position = new Vector3(),
     far = Infinity,
-    backgroundColor = new Vector3(200, 230, 255)
+    background = new Vector3(200, 230, 255)
   ) {
     super(position);
-    this.backgroundColor = backgroundColor;
+    this.background = background;
     this.fov = fov;
     this.canvas = canvas;
     this.viewport = {};
@@ -18,6 +18,7 @@ class Camera extends Object3D {
     this.viewport.width = 1 * canvas.aspect;
     this.viewport.height = 1;
     this.viewport.far = far;
+    this.rotation = new Vector3();
   }
   toViewport(x, y) {
     const viewportX =
@@ -25,7 +26,15 @@ class Camera extends Object3D {
     const viewportY =
       y * (this.viewport.height / this.canvas.height) + this.position.y;
     const viewportZ = this.viewport.distance + this.position.z;
-    return new Vector3(viewportX, viewportY, viewportZ);
+    let position = new Vector3(viewportX, viewportY, viewportZ);
+    return position;
+  }
+  getBackgroundColor(direction) {
+    if (this.background instanceof Vector3) {
+      return this.background;
+    } else {
+      return this.background.getColor(direction);
+    }
   }
 }
 export default Camera;
