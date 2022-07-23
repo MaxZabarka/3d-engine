@@ -38,19 +38,7 @@ class Vector3 {
     );
   }
   rotate(yaw, pitch) {
-    // const yawRads = degsToRads(yaw);
-    // const pitchRads = degsToRads(pitch);
-
-    // // Step one: Rotate around X axis (pitch)
-    // const _y = this.y * Math.cos(pitchRads) - this.z * Math.sin(pitchRads);
-    // let _z = this.y * Math.sin(pitchRads) + this.z * Math.cos(pitchRads);
-
-    // // Step two: Rotate around the Y axis (yaw)
-    // const _x = this.x * Math.cos(yawRads) + _z * Math.sin(yawRads);
-    // _z = -this.x * Math.sin(yawRads) + _z * Math.cos(yawRads);
-
-    // return new Vector3(_x, _y, _z);
-
+    // https://github.com/carl-vbn/pure-java-raytracer/blob/master/src/carlvbn/raytracing/math/Vector3.java
     // Convert to radians
     const yawRads = degsToRads(yaw);
     const pitchRads = degsToRads(pitch);
